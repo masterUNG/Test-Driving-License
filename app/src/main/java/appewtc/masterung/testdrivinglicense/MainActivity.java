@@ -105,6 +105,17 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(context, "ยินดีต้อนรับ " + loginNameString,
                             Toast.LENGTH_SHORT).show();
 
+                    //Intent to Service
+                    loginStrings = new String[3];
+                    loginStrings[0] = loginIDString;
+                    loginStrings[1] = loginNameString;
+                    loginStrings[2] = loginAgeString;
+
+                    Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
+                    intent.putExtra("login", loginStrings);
+                    startActivity(intent);
+                    finish();
+
                 } else {
                     //Password False
                     MyAlert myAlert = new MyAlert();
