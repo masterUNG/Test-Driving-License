@@ -34,7 +34,7 @@ public class TestActivity extends AppCompatActivity {
             choice2Strings, choice3Strings, choice4Strings, answerStrings;
     private int[] indexInts = new int[4];   // จำนวนข้อที่ต้องการให้ทดสอบ เปลี่ยน 4 ==> 50
     private int timesAnInt = 1;
-    private int myTimes = 0;
+    private int myTimes = 0, scoreAnInt = 0, loginAnInt, myIndex =0;
 
 
     @Override
@@ -54,6 +54,28 @@ public class TestActivity extends AppCompatActivity {
         SynQuestion synQuestion = new SynQuestion(this);
         synQuestion.execute();
 
+        //Radio Controller
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                switch (i) {
+                    case R.id.radioButton:
+                        loginAnInt = 1;
+                        break;
+                    case R.id.radioButton2:
+                        loginAnInt = 2;
+                        break;
+                    case R.id.radioButton3:
+                        loginAnInt = 3;
+                        break;
+                    case R.id.radioButton4:
+                        loginAnInt = 4;
+                        break;
+                }
+
+            }   // onChecked
+        });
 
     }   // Main Method
 
@@ -176,6 +198,13 @@ public class TestActivity extends AppCompatActivity {
                     "โปรดเลือกคำตอบ ด้วยคะ");
 
         } else if (timesAnInt < indexInts.length) {
+
+            if (loginAnInt == Integer.parseInt(answerStrings[myIndex])) {
+                scoreAnInt += 1;
+            }   // if
+
+            myIndex += 1;
+            Log.d("21JulyV5", "score ==> " + scoreAnInt);
 
             showText(timesAnInt);
             timesAnInt += 1;
