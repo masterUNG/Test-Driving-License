@@ -165,6 +165,19 @@ public class TestActivity extends AppCompatActivity {
 
     public void clickAnswer(View view) {
 
+        //Check Choose
+        if (choice1RadioButton.isChecked()) {
+            //Have Choose
+
+        } else {
+            //No Choose
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "ยังไม่ได้เลือกคำตอบ",
+                    "โปรดเลือกคำตอบ ด้วยคะ");
+
+        } // if
+
+
     }   // clickAnswer
 
 }   // Main Class
