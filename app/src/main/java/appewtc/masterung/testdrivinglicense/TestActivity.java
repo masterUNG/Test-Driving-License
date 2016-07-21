@@ -33,6 +33,7 @@ public class TestActivity extends AppCompatActivity {
             choice2Strings, choice3Strings, choice4Strings, answerStrings;
     private int[] indexInts = new int[4];   // จำนวนข้อที่ต้องการให้ทดสอบ เปลี่ยน 4 ==> 50
     private int timesAnInt = 1;
+    private int myTimes = 0;
 
 
     @Override
@@ -137,7 +138,7 @@ public class TestActivity extends AppCompatActivity {
 
     private void showText(int indexInt) {
 
-        textView.setText(Integer.toString(timesAnInt) + ". " + questionStrings[indexInt]);
+        textView.setText(Integer.toString(myTimes+=1) + ". " + questionStrings[indexInt]);
 
         if (imageStrings[indexInt].length() != 0) {
 
@@ -166,18 +167,21 @@ public class TestActivity extends AppCompatActivity {
     public void clickAnswer(View view) {
 
         //Check Choose
-        if (choice1RadioButton.isChecked() || choice2RadioButton.isChecked() ||
-                choice3RadioButton.isChecked() || choice4RadioButton.isChecked()) {
-            //Have Choose
-
-
-        } else {
+        if (!(choice1RadioButton.isChecked() || choice2RadioButton.isChecked() ||
+                choice3RadioButton.isChecked() || choice4RadioButton.isChecked())) {
             //No Choose
             MyAlert myAlert = new MyAlert();
             myAlert.myDialog(this, "ยังไม่ได้เลือกคำตอบ",
                     "โปรดเลือกคำตอบ ด้วยคะ");
 
-        } // if
+        } else if (timesAnInt <= indexInts.length) {
+
+            showText(timesAnInt);
+            timesAnInt += 1;
+
+        } else {
+
+        }   // if
 
 
     }   // clickAnswer
