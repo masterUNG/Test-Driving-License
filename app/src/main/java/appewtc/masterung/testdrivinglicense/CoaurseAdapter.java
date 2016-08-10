@@ -10,16 +10,19 @@ import android.widget.TextView;
 /**
  * Created by masterUNG on 7/21/2016 AD.
  */
-public class CoaurseAdapter extends BaseAdapter{
+public class CoaurseAdapter extends BaseAdapter {
 
     //Explicit
     private Context context;
+    private int navigateAnInt;
     private String[] titleStrings, detailStrings;
 
     public CoaurseAdapter(Context context,
+                          int navigateAnInt,
                           String[] titleStrings,
                           String[] detailStrings) {
         this.context = context;
+        this.navigateAnInt = navigateAnInt;
         this.titleStrings = titleStrings;
         this.detailStrings = detailStrings;
     }
@@ -50,9 +53,16 @@ public class CoaurseAdapter extends BaseAdapter{
         TextView detailTextView = (TextView) view1.findViewById(R.id.textView14);
 
         titleTextView.setText(titleStrings[i]);
-        String shortDetail = detailStrings[i].substring(0, 20) + "...";
-        detailTextView.setText(shortDetail);
 
+        switch (navigateAnInt) {
+            case 0:
+                String shortDetail = detailStrings[i].substring(0, 20) + "...";
+                detailTextView.setText(shortDetail);
+                break;
+            case 1:
+                detailTextView.setText(detailStrings[i]);
+                break;
+        }
 
         return view1;
     }
