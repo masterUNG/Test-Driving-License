@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -68,8 +70,8 @@ public class LabalActivity extends AppCompatActivity {
 
                 JSONArray jsonArray = new JSONArray(s);
                 String[] iconStrings = new String[jsonArray.length()];
-                String[] labelStrings = new String[jsonArray.length()];
-                String[] contentStrings = new String[jsonArray.length()];
+                final String[] labelStrings = new String[jsonArray.length()];
+                final String[] contentStrings = new String[jsonArray.length()];
                 for (int i=0;i<jsonArray.length();i++) {
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -82,6 +84,16 @@ public class LabalActivity extends AppCompatActivity {
                 LabelAdapter labelAdapter = new LabelAdapter(context,
                         iconStrings, labelStrings, contentStrings);
                 myListView.setAdapter(labelAdapter);
+
+                myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        MyAlert myAlert = new MyAlert();
+                        myAlert.myDialog(context, labelStrings[i], contentStrings[i]);
+
+                    }   // onItemClick
+                });
 
 
             } catch (Exception e) {
